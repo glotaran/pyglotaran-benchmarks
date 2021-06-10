@@ -65,7 +65,7 @@ def create_pr_index_page(branches: list[str]):
         li.append(pr_link)
         li.append(" ( ")
         benchmark_link = template.new_tag(
-            "a", href=f"https://s-weigand.github.io/pyglotaran-benchmarks/prs/{branch}"
+            "a", href=f"https://glotaran.github.io/pyglotaran-benchmarks/prs/{branch}"
         )
         benchmark_link.append("benchmark")
         li.append(benchmark_link)
