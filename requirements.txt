@@ -1,0 +1,4 @@
+asv
+requests
+bs4
+lxml
