@@ -7,21 +7,30 @@ on:
 
 jobs:
   build:
+    name: Build gh-pages
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout main branch
         uses: actions/checkout@v2
+        with:
+          ref: main
+          fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
-      - name: Install ASV
+      - name: Install dependencies
         run: |
-          pip install asv virtualenv
-
+          python -m pip install -r requirements.txt
       - name: Build Github-Pages
         run: |
           asv --config=.github/asv.conf.json publish --no-pull
+      - name: Build PR index page
+        run: |
+          python .github/create_pr_pages.py
+
+      - name: Show file tree
+        run: tree html
 
       - name: Upload bundled page
         if: success()
@@ -31,6 +40,7 @@ jobs:
           path: html
 
   deploy-page:
+    name: Deploy gh-pages
     if: github.event_name == 'push'
     needs: [build]
     runs-on: ubuntu-latest
