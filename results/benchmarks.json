@@ -1,0 +1,29 @@
+{
+    "IntegrationTwoDatasets.peakmem_optimize": {
+        "code": "class IntegrationTwoDatasets:\n    def peakmem_optimize(self):\n        optimize(self.scheme)\n\n    def setup(self):\n        dataset1 = load_dataset(SCRIPT_DIR / \"data/data1.ascii\")\n        dataset2 = load_dataset(SCRIPT_DIR / \"data/data2.ascii\")\n        model = load_model(str(SCRIPT_DIR / \"models/model.yml\"))\n        parameters = load_parameters(str(SCRIPT_DIR / \"models/parameters.yml\"))\n        self.scheme = Scheme(\n            model,\n            parameters,\n            {\"dataset1\": dataset1, \"dataset2\": dataset2},\n            maximum_number_function_evaluations=11,\n            non_negative_least_squares=True,\n            optimization_method=\"TrustRegionReflection\",\n        )",
+        "name": "IntegrationTwoDatasets.peakmem_optimize",
+        "param_names": [],
+        "params": [],
+        "timeout": 60.0,
+        "type": "peakmemory",
+        "unit": "bytes",
+        "version": "2860b44e85e7ef98dcfd710ef7059826dce545d916406e5241fc525139f7f657"
+    },
+    "IntegrationTwoDatasets.time_optimize": {
+        "code": "class IntegrationTwoDatasets:\n    def time_optimize(self):\n        optimize(self.scheme)\n\n    def setup(self):\n        dataset1 = load_dataset(SCRIPT_DIR / \"data/data1.ascii\")\n        dataset2 = load_dataset(SCRIPT_DIR / \"data/data2.ascii\")\n        model = load_model(str(SCRIPT_DIR / \"models/model.yml\"))\n        parameters = load_parameters(str(SCRIPT_DIR / \"models/parameters.yml\"))\n        self.scheme = Scheme(\n            model,\n            parameters,\n            {\"dataset1\": dataset1, \"dataset2\": dataset2},\n            maximum_number_function_evaluations=11,\n            non_negative_least_squares=True,\n            optimization_method=\"TrustRegionReflection\",\n        )",
+        "min_run_count": 2,
+        "name": "IntegrationTwoDatasets.time_optimize",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3109034d39299e73b3fea779473bec4a67ab7f7d7dec86e052aaae60a93f3173",
+        "warmup_time": -1
+    },
+    "version": 2
+}
