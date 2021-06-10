@@ -131,3 +131,6 @@ dmypy.json
 # asv temp files
 html
 .github/pyglotaran
+
+# vscode config files
+.vscode
