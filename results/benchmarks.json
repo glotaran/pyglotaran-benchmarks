@@ -1,16 +1,42 @@
 {
+    "IntegrationTwoDatasets.peakmem_create_result": {
+        "code": "class IntegrationTwoDatasets:\n    def peakmem_create_result(self):\n        _create_result(\n            self.problem, self.ls_result, self.free_parameter_labels, self.termination_reason\n        )\n\n    def setup(self):\n        dataset1 = load_dataset(SCRIPT_DIR / \"data/data1.ascii\")\n        dataset2 = load_dataset(SCRIPT_DIR / \"data/data2.ascii\")\n        model = load_model(str(SCRIPT_DIR / \"models/model.yml\"))\n        parameters = load_parameters(str(SCRIPT_DIR / \"models/parameters.yml\"))\n        self.scheme = Scheme(\n            model,\n            parameters,\n            {\"dataset1\": dataset1, \"dataset2\": dataset2},\n            maximum_number_function_evaluations=11,\n            non_negative_least_squares=True,\n            optimization_method=\"TrustRegionReflection\",\n        )\n        # Values extracted from a previous run of IntegrationTwoDatasets.time_optimize()\n        self.problem = GroupedProblem(self.scheme)\n        # pickled OptimizeResult\n        with open(SCRIPT_DIR / \"data/ls_result.pcl\", \"rb\") as ls_result_file:\n            self.ls_result: OptimizeResult = pickle.load(ls_result_file)\n        self.free_parameter_labels = [\n            \"inputs.2\",\n            \"inputs.3\",\n            \"inputs.7\",\n            \"inputs.8\",\n            \"scale.2\",\n            \"rates.k1\",\n            \"rates.k2\",\n            \"rates.k3\",\n            \"irf.center\",\n            \"irf.width\",\n        ]\n        self.termination_reason = \"The maximum number of function evaluations is exceeded.\"",
+        "name": "IntegrationTwoDatasets.peakmem_create_result",
+        "param_names": [],
+        "params": [],
+        "timeout": 60.0,
+        "type": "peakmemory",
+        "unit": "bytes",
+        "version": "2a3ee1b1b67bddc3ed9d0f7fefbda8c7f31c93e454da4ccf8fdee0e9790d97c1"
+    },
     "IntegrationTwoDatasets.peakmem_optimize": {
-        "code": "class IntegrationTwoDatasets:\n    def peakmem_optimize(self):\n        optimize(self.scheme)\n\n    def setup(self):\n        dataset1 = load_dataset(SCRIPT_DIR / \"data/data1.ascii\")\n        dataset2 = load_dataset(SCRIPT_DIR / \"data/data2.ascii\")\n        model = load_model(str(SCRIPT_DIR / \"models/model.yml\"))\n        parameters = load_parameters(str(SCRIPT_DIR / \"models/parameters.yml\"))\n        self.scheme = Scheme(\n            model,\n            parameters,\n            {\"dataset1\": dataset1, \"dataset2\": dataset2},\n            maximum_number_function_evaluations=11,\n            non_negative_least_squares=True,\n            optimization_method=\"TrustRegionReflection\",\n        )",
+        "code": "class IntegrationTwoDatasets:\n    def peakmem_optimize(self):\n        optimize(self.scheme)\n\n    def setup(self):\n        dataset1 = load_dataset(SCRIPT_DIR / \"data/data1.ascii\")\n        dataset2 = load_dataset(SCRIPT_DIR / \"data/data2.ascii\")\n        model = load_model(str(SCRIPT_DIR / \"models/model.yml\"))\n        parameters = load_parameters(str(SCRIPT_DIR / \"models/parameters.yml\"))\n        self.scheme = Scheme(\n            model,\n            parameters,\n            {\"dataset1\": dataset1, \"dataset2\": dataset2},\n            maximum_number_function_evaluations=11,\n            non_negative_least_squares=True,\n            optimization_method=\"TrustRegionReflection\",\n        )\n        # Values extracted from a previous run of IntegrationTwoDatasets.time_optimize()\n        self.problem = GroupedProblem(self.scheme)\n        # pickled OptimizeResult\n        with open(SCRIPT_DIR / \"data/ls_result.pcl\", \"rb\") as ls_result_file:\n            self.ls_result: OptimizeResult = pickle.load(ls_result_file)\n        self.free_parameter_labels = [\n            \"inputs.2\",\n            \"inputs.3\",\n            \"inputs.7\",\n            \"inputs.8\",\n            \"scale.2\",\n            \"rates.k1\",\n            \"rates.k2\",\n            \"rates.k3\",\n            \"irf.center\",\n            \"irf.width\",\n        ]\n        self.termination_reason = \"The maximum number of function evaluations is exceeded.\"",
         "name": "IntegrationTwoDatasets.peakmem_optimize",
         "param_names": [],
         "params": [],
         "timeout": 60.0,
         "type": "peakmemory",
         "unit": "bytes",
-        "version": "2860b44e85e7ef98dcfd710ef7059826dce545d916406e5241fc525139f7f657"
+        "version": "551a31c57aff931719ff98acc4b71961be3715cc8ea8d122b552c67264748529"
+    },
+    "IntegrationTwoDatasets.time_create_result": {
+        "code": "class IntegrationTwoDatasets:\n    def time_create_result(self):\n        _create_result(\n            self.problem, self.ls_result, self.free_parameter_labels, self.termination_reason\n        )\n\n    def setup(self):\n        dataset1 = load_dataset(SCRIPT_DIR / \"data/data1.ascii\")\n        dataset2 = load_dataset(SCRIPT_DIR / \"data/data2.ascii\")\n        model = load_model(str(SCRIPT_DIR / \"models/model.yml\"))\n        parameters = load_parameters(str(SCRIPT_DIR / \"models/parameters.yml\"))\n        self.scheme = Scheme(\n            model,\n            parameters,\n            {\"dataset1\": dataset1, \"dataset2\": dataset2},\n            maximum_number_function_evaluations=11,\n            non_negative_least_squares=True,\n            optimization_method=\"TrustRegionReflection\",\n        )\n        # Values extracted from a previous run of IntegrationTwoDatasets.time_optimize()\n        self.problem = GroupedProblem(self.scheme)\n        # pickled OptimizeResult\n        with open(SCRIPT_DIR / \"data/ls_result.pcl\", \"rb\") as ls_result_file:\n            self.ls_result: OptimizeResult = pickle.load(ls_result_file)\n        self.free_parameter_labels = [\n            \"inputs.2\",\n            \"inputs.3\",\n            \"inputs.7\",\n            \"inputs.8\",\n            \"scale.2\",\n            \"rates.k1\",\n            \"rates.k2\",\n            \"rates.k3\",\n            \"irf.center\",\n            \"irf.width\",\n        ]\n        self.termination_reason = \"The maximum number of function evaluations is exceeded.\"",
+        "min_run_count": 2,
+        "name": "IntegrationTwoDatasets.time_create_result",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "962a1fce42d7308a327af97b2f4fe94ba0521fce38eb2d1fb8087a83b7f829ae",
+        "warmup_time": -1
     },
     "IntegrationTwoDatasets.time_optimize": {
-        "code": "class IntegrationTwoDatasets:\n    def time_optimize(self):\n        optimize(self.scheme)\n\n    def setup(self):\n        dataset1 = load_dataset(SCRIPT_DIR / \"data/data1.ascii\")\n        dataset2 = load_dataset(SCRIPT_DIR / \"data/data2.ascii\")\n        model = load_model(str(SCRIPT_DIR / \"models/model.yml\"))\n        parameters = load_parameters(str(SCRIPT_DIR / \"models/parameters.yml\"))\n        self.scheme = Scheme(\n            model,\n            parameters,\n            {\"dataset1\": dataset1, \"dataset2\": dataset2},\n            maximum_number_function_evaluations=11,\n            non_negative_least_squares=True,\n            optimization_method=\"TrustRegionReflection\",\n        )",
+        "code": "class IntegrationTwoDatasets:\n    def time_optimize(self):\n        optimize(self.scheme)\n\n    def setup(self):\n        dataset1 = load_dataset(SCRIPT_DIR / \"data/data1.ascii\")\n        dataset2 = load_dataset(SCRIPT_DIR / \"data/data2.ascii\")\n        model = load_model(str(SCRIPT_DIR / \"models/model.yml\"))\n        parameters = load_parameters(str(SCRIPT_DIR / \"models/parameters.yml\"))\n        self.scheme = Scheme(\n            model,\n            parameters,\n            {\"dataset1\": dataset1, \"dataset2\": dataset2},\n            maximum_number_function_evaluations=11,\n            non_negative_least_squares=True,\n            optimization_method=\"TrustRegionReflection\",\n        )\n        # Values extracted from a previous run of IntegrationTwoDatasets.time_optimize()\n        self.problem = GroupedProblem(self.scheme)\n        # pickled OptimizeResult\n        with open(SCRIPT_DIR / \"data/ls_result.pcl\", \"rb\") as ls_result_file:\n            self.ls_result: OptimizeResult = pickle.load(ls_result_file)\n        self.free_parameter_labels = [\n            \"inputs.2\",\n            \"inputs.3\",\n            \"inputs.7\",\n            \"inputs.8\",\n            \"scale.2\",\n            \"rates.k1\",\n            \"rates.k2\",\n            \"rates.k3\",\n            \"irf.center\",\n            \"irf.width\",\n        ]\n        self.termination_reason = \"The maximum number of function evaluations is exceeded.\"",
         "min_run_count": 2,
         "name": "IntegrationTwoDatasets.time_optimize",
         "number": 0,
@@ -22,7 +48,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "3109034d39299e73b3fea779473bec4a67ab7f7d7dec86e052aaae60a93f3173",
+        "version": "489f518feda93a59247e32b8022fa35a283a715d16c3a1677e122dc0cda7bc0a",
         "warmup_time": -1
     },
     "version": 2
