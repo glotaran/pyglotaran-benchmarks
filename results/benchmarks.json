@@ -1,4 +1,37 @@
 {
+    "BenchmarkOptimize.time_optimize": {
+        "code": "class BenchmarkOptimize:\n    def time_optimize(self, index_dependent, grouped, weight):\n        optimize(self.scheme)\n\n    def setup(self, index_dependent, grouped, weight):\n        suite = MultichannelMulticomponentDecay\n        model = suite.model\n        # 0.4.0 API compat\n        model.is_grouped = grouped\n    \n        model.megacomplex[\"m1\"].is_index_dependent = index_dependent\n    \n        sim_model = suite.sim_model\n        suite.sim_model.megacomplex[\"m1\"].is_index_dependent = index_dependent\n    \n        wanted_parameters = suite.wanted_parameters\n    \n        initial_parameters = suite.initial_parameters\n        model.dataset[\"dataset1\"].fill(model, initial_parameters)\n    \n        if hasattr(suite, \"global_axis\"):\n            axes_dict = {\n                \"global\": getattr(suite, \"global_axis\"),\n                \"model\": getattr(suite, \"model_axis\"),\n            }\n        else:\n            # 0.4.0 API compat\n            axes_dict = {\n                \"e\": getattr(suite, \"e_axis\"),\n                \"c\": getattr(suite, \"c_axis\"),\n            }\n    \n        dataset = simulate(sim_model, \"dataset1\", wanted_parameters, axes_dict)\n    \n        if weight:\n            dataset[\"weight\"] = xr.DataArray(\n                np.ones_like(dataset.data) * 0.5, coords=dataset.data.coords\n            )\n    \n        data = {\"dataset1\": dataset}\n    \n        self.scheme = Scheme(\n            model=model,\n            parameters=initial_parameters,\n            data=data,\n            maximum_number_function_evaluations=10,\n            group_tolerance=0.1,\n            optimization_method=\"TrustRegionReflection\",\n        )\n        # 0.4.0 API compat\n        if hasattr(self.scheme, \"group\"):\n            self.scheme.group = grouped",
+        "min_run_count": 2,
+        "name": "BenchmarkOptimize.time_optimize",
+        "number": 0,
+        "param_names": [
+            "index_dependent",
+            "grouped",
+            "weight"
+        ],
+        "params": [
+            [
+                "True",
+                "False"
+            ],
+            [
+                "True",
+                "False"
+            ],
+            [
+                "True",
+                "False"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 300,
+        "type": "time",
+        "unit": "seconds",
+        "version": "1560762892c2d46b8de6b3fadeeb3450c70877cb113d447b9f710a6141cf83e5",
+        "warmup_time": -1
+    },
     "IntegrationTwoDatasets.peakmem_create_result": {
         "code": "class IntegrationTwoDatasets:\n    def peakmem_create_result(self):\n        _create_result(\n            self.problem, self.ls_result, self.free_parameter_labels, self.termination_reason\n        )\n\n    def setup(self):\n        dataset1 = load_dataset(SCRIPT_DIR / \"data/data1.ascii\")\n        dataset2 = load_dataset(SCRIPT_DIR / \"data/data2.ascii\")\n        model = load_model(str(SCRIPT_DIR / \"models/model.yml\"))\n        parameters = load_parameters(str(SCRIPT_DIR / \"models/parameters.yml\"))\n        self.scheme = Scheme(\n            model,\n            parameters,\n            {\"dataset1\": dataset1, \"dataset2\": dataset2},\n            maximum_number_function_evaluations=11,\n            non_negative_least_squares=True,\n            optimization_method=\"TrustRegionReflection\",\n        )\n        # Values extracted from a previous run of IntegrationTwoDatasets.time_optimize()\n        self.problem = GroupedProblem(self.scheme)\n        # pickled OptimizeResult\n        with open(SCRIPT_DIR / \"data/ls_result.pcl\", \"rb\") as ls_result_file:\n            self.ls_result: OptimizeResult = pickle.load(ls_result_file)\n        self.free_parameter_labels = [\n            \"inputs.2\",\n            \"inputs.3\",\n            \"inputs.7\",\n            \"inputs.8\",\n            \"scale.2\",\n            \"rates.k1\",\n            \"rates.k2\",\n            \"rates.k3\",\n            \"irf.center\",\n            \"irf.width\",\n        ]\n        self.termination_reason = \"The maximum number of function evaluations is exceeded.\"",
         "name": "IntegrationTwoDatasets.peakmem_create_result",
