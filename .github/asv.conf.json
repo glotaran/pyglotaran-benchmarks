@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "project": "pyglotaran",
+  "project_url": "https://github.com/glotaran/pyglotaran",
+  "repo": "https://github.com/glotaran/pyglotaran",
+  "branches": ["HEAD"], // for git
+  "dvcs": "git",
+  "environment_type": "virtualenv",
+  "show_commit_url": "http://github.com/glotaran/pyglotaran/commit/",
+  "results_dir": "../results",
+  "html_dir": "../html"
+}
