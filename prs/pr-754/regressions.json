@@ -1,0 +1,1 @@
+{"regressions": [["BenchmarkOptimize.time_optimize(True, True, True)", "graphs/arch-x86_64/branch-HEAD/cpu-Intel(R) Xeon(R) Platinum 8171M CPU @ 2.60GHz/machine-gh_action/num_cpu-2/os-Linux 5.8.0-1033-azure/python-3.8/ram-7GB/BenchmarkOptimize.time_optimize.json", {}, 0, 0.15566860549998296, 0.09730121100000133, [[1349, 1449, 0.09730121100000133, 0.15566860549998296]]]]}
