@@ -23,8 +23,8 @@
                 "False"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 300,
         "type": "time",
@@ -49,8 +49,8 @@
         "number": 0,
         "param_names": [],
         "params": [],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 300,
         "type": "time",
