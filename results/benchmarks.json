@@ -33,17 +33,17 @@
         "warmup_time": -1
     },
     "IntegrationTwoDatasets.peakmem_optimize": {
-        "code": "class IntegrationTwoDatasets:\n    def peakmem_optimize(self):\n        optimize(self.scheme)\n\n    def setup(self):\n        dataset1 = load_dataset(SCRIPT_DIR / \"data/data1.ascii\")\n        dataset2 = load_dataset(SCRIPT_DIR / \"data/data2.ascii\")\n        model = load_model(str(SCRIPT_DIR / \"models/model.yml\"))\n        parameters = load_parameters(str(SCRIPT_DIR / \"models/parameters.yml\"))\n        self.scheme = Scheme(\n            model,\n            parameters,\n            {\"dataset1\": dataset1, \"dataset2\": dataset2},\n            maximum_number_function_evaluations=11,\n            non_negative_least_squares=True,\n            optimization_method=\"TrustRegionReflection\",\n        )",
+        "code": "class IntegrationTwoDatasets:\n    def peakmem_optimize(self):\n        optimize(self.scheme)\n\n    def setup(self):\n        dataset1 = load_dataset(SCRIPT_DIR / \"data/data1.ascii\")\n        dataset2 = load_dataset(SCRIPT_DIR / \"data/data2.ascii\")\n        parameters = load_parameters(str(SCRIPT_DIR / \"models/parameters.yml\"))\n        addition_kwargs = {}\n        if int(__version__.split(\".\")[1]) < 7:\n            model = load_model(str(SCRIPT_DIR / \"models/model_lt_0.7.0.yml\"))\n            addition_kwargs[\"non_negative_least_squares\"] = True\n        else:\n            model = load_model(str(SCRIPT_DIR / \"models/model.yml\"))\n        self.scheme = Scheme(\n            model,\n            parameters,\n            {\"dataset1\": dataset1, \"dataset2\": dataset2},\n            maximum_number_function_evaluations=11,\n            optimization_method=\"TrustRegionReflection\",\n            **addition_kwargs,\n        )",
         "name": "IntegrationTwoDatasets.peakmem_optimize",
         "param_names": [],
         "params": [],
         "timeout": 300,
         "type": "peakmemory",
         "unit": "bytes",
-        "version": "2860b44e85e7ef98dcfd710ef7059826dce545d916406e5241fc525139f7f657"
+        "version": "dd51208102b050544e77980718001a24ff24f8ec7de7a0ae92abdbbba7a45660"
     },
     "IntegrationTwoDatasets.time_optimize": {
-        "code": "class IntegrationTwoDatasets:\n    def time_optimize(self):\n        optimize(self.scheme)\n\n    def setup(self):\n        dataset1 = load_dataset(SCRIPT_DIR / \"data/data1.ascii\")\n        dataset2 = load_dataset(SCRIPT_DIR / \"data/data2.ascii\")\n        model = load_model(str(SCRIPT_DIR / \"models/model.yml\"))\n        parameters = load_parameters(str(SCRIPT_DIR / \"models/parameters.yml\"))\n        self.scheme = Scheme(\n            model,\n            parameters,\n            {\"dataset1\": dataset1, \"dataset2\": dataset2},\n            maximum_number_function_evaluations=11,\n            non_negative_least_squares=True,\n            optimization_method=\"TrustRegionReflection\",\n        )",
+        "code": "class IntegrationTwoDatasets:\n    def time_optimize(self):\n        optimize(self.scheme)\n\n    def setup(self):\n        dataset1 = load_dataset(SCRIPT_DIR / \"data/data1.ascii\")\n        dataset2 = load_dataset(SCRIPT_DIR / \"data/data2.ascii\")\n        parameters = load_parameters(str(SCRIPT_DIR / \"models/parameters.yml\"))\n        addition_kwargs = {}\n        if int(__version__.split(\".\")[1]) < 7:\n            model = load_model(str(SCRIPT_DIR / \"models/model_lt_0.7.0.yml\"))\n            addition_kwargs[\"non_negative_least_squares\"] = True\n        else:\n            model = load_model(str(SCRIPT_DIR / \"models/model.yml\"))\n        self.scheme = Scheme(\n            model,\n            parameters,\n            {\"dataset1\": dataset1, \"dataset2\": dataset2},\n            maximum_number_function_evaluations=11,\n            optimization_method=\"TrustRegionReflection\",\n            **addition_kwargs,\n        )",
         "min_run_count": 2,
         "name": "IntegrationTwoDatasets.time_optimize",
         "number": 0,
@@ -55,7 +55,7 @@
         "timeout": 300,
         "type": "time",
         "unit": "seconds",
-        "version": "3109034d39299e73b3fea779473bec4a67ab7f7d7dec86e052aaae60a93f3173",
+        "version": "8eab061a0b77c818415ddf03d1e998d6aeb84505258f3017b5e40f0f5bec3ca0",
         "warmup_time": -1
     },
     "version": 2
